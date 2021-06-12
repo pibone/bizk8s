@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+from argparse import ArgumentParser
+from os import path
+
+def run_shell(script: str):
+    from subprocess import run
+    run(script, shell=True)
+
+parser = ArgumentParser(
+    description="Bizk8s platform installer"
+)
+
+for (short, long, help) in [
+    ('-d', '--delete-local', 'Delete local minikube'),
+    ('-l', '--local', 'Install on local minikube'),
+    ('-L', '--local-replace', 'Delete local minikube and install'),
+]:
+    parser.add_argument(short, long, help=help, action="store_true")
+
+args = parser.parse_args()
+
+### Constants
+CLUSTER="dev-cluster"
+CPUS="3"
+MEMORY="6g"
+DRIVER="hyperkit"
+FLUX_CMD="flux"
+FLUX_VERSION="v0.14.2"
+MINIKUBE_CMD="minikube"
+
+# Cluster
+if args.delete_local or args.local_replace:
+    run_shell(f"""
+        {MINIKUBE_CMD} delete -p {CLUSTER}
+    """)
+
+if args.local or args.local_replace:
+    run_shell(f"""
+        {MINIKUBE_CMD} start -p {CLUSTER} --cpus {CPUS} --memory {MEMORY} --driver {DRIVER}
+    """)
+
+# Install fluxcd/flux2
+run_shell(f"""{FLUX_CMD} install -v={FLUX_VERSION}""")
