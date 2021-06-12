@@ -1,5 +1,6 @@
 resources:
-- istio-operator.yaml
+- istio-base.yaml
+- istiod.yaml
 - istio-ingress.yaml
-- kiali-operator.yaml
+- kiali-server.yaml
 - prometheus-stack.yaml
