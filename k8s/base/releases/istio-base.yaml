@@ -3,6 +3,13 @@ kind: HelmRelease
 metadata:
   name: istio-base
 spec:
+  interval: 24h
+  targetNamespace: istio-system
+  install:
+    createNamespace: true
   chart:
     spec:
       chart: ./manifests/charts/base
+      sourceRef:
+        kind: GitRepository
+        name: istio

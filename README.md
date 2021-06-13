@@ -7,4 +7,3 @@ This project looks for a k8s platform for developers.
 - Deployment stages
 - ServiceMesh
 - Monitoring
-- Operators

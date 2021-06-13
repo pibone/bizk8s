@@ -3,8 +3,13 @@ kind: HelmRelease
 metadata:
   name: istio-ingress
 spec:
+  interval: 24h
+  targetNamespace: istio-system
   dependsOn:
-    - name: istiod
+    - name: istio-discovery
   chart:
     spec:
       chart: ./manifests/charts/gateways/istio-ingress
+      sourceRef:
+        kind: GitRepository
+        name: istio
