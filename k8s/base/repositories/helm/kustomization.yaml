@@ -1,3 +1,5 @@
 resources:
 - kiali.yaml
 - prometheus-community.yaml
+- elastic.yaml
+- jaegertracing.yaml

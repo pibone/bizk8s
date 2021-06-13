@@ -4,3 +4,4 @@ resources:
 - istio-ingress.yaml
 - kiali-server.yaml
 - prometheus-stack.yaml
+- elastic-operator.yaml
